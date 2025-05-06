@@ -104,7 +104,10 @@ export class ShopController {
       };
     } catch (error) {
       console.error('Error creating product:', error);
-      throw new Error('Could not create product: ' + error.message);
+      throw new Error(
+        'Could not create product: ' +
+          (error instanceof Error ? error.message : 'Unknown error'),
+      );
     }
   }
 

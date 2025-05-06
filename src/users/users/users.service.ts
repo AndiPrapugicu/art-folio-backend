@@ -151,8 +151,8 @@ export class UsersService {
       };
     } catch (error) {
       console.error('❌ [UsersService] Eroare completă:', {
-        message: error.message,
-        stack: error.stack,
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : 'No stack trace',
         email: loginUserDto.email,
       });
       throw error;

@@ -212,8 +212,12 @@ export class AuthController {
     } catch (error) {
       console.error('Upload error:', error);
       throw new HttpException(
-        error.message || 'Eroare la încărcarea imaginii',
-        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+        error instanceof Error
+          ? error.message
+          : 'Eroare la încărcarea imaginii',
+        error instanceof Error && typeof (error as any).status === 'number'
+          ? (error as any).status
+          : HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
@@ -244,8 +248,10 @@ export class AuthController {
     } catch (error) {
       console.error('Error in updateBio:', error);
       throw new HttpException(
-        error.message || 'Error updating bio',
-        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+        error instanceof Error ? error.message : 'Error updating bio',
+        error instanceof Error && typeof (error as any).status === 'number'
+          ? (error as any).status
+          : HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
@@ -268,8 +274,10 @@ export class AuthController {
       return result;
     } catch (error) {
       throw new HttpException(
-        error.message || 'Error updating website',
-        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+        error instanceof Error ? error.message : 'Error updating website',
+        error instanceof Error && typeof (error as any).status === 'number'
+          ? (error as any).status
+          : HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
@@ -332,8 +340,12 @@ export class AuthController {
       };
     } catch (error) {
       throw new HttpException(
-        error.message || 'Could not update contact information',
-        error.status || HttpStatus.BAD_REQUEST,
+        error instanceof Error
+          ? error.message
+          : 'Could not update contact information',
+        error instanceof Error && typeof (error as any).status === 'number'
+          ? (error as any).status
+          : HttpStatus.BAD_REQUEST,
       );
     }
   }

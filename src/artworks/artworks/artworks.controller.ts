@@ -248,8 +248,12 @@ export class ArtworksController {
     } catch (error) {
       console.error('Error in uploadFile:', error);
       throw new HttpException(
-        error.message || 'Eroare la încărcarea artwork-ului',
-        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+        error instanceof Error
+          ? error.message
+          : 'Eroare la încărcarea artwork-ului',
+        error instanceof Error && typeof (error as any).status === 'number'
+          ? (error as any).status
+          : HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }

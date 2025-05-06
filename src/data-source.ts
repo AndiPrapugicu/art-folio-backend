@@ -16,6 +16,6 @@ export default new DataSource({
   password: configService.get('DB_PASSWORD'),
   database: configService.get('DB_DATABASE'),
   entities: [User, Artwork],
-  migrations: ['src/migrations/*.ts'],
+  migrations: ['dist/migrations/*.js'], // Migrațiile compilate vor fi în `dist/migrations`
   synchronize: false,
 });
