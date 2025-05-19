@@ -16,7 +16,7 @@ async function bootstrap() {
 
   // Configurare CORS
   app.enableCors({
-    origin: 'https://art-folio-coral.vercel.app/',
+    origin: 'https://art-folio-coral.vercel.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
