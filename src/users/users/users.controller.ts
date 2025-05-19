@@ -195,7 +195,8 @@ export class AuthController {
         );
       }
 
-      const baseUrl = process.env.API_URL || 'http://localhost:3000';
+      const baseUrl =
+        process.env.API_URL || 'https://art-folio-backend.onrender.com/api';
       // Modificăm construirea URL-ului pentru imagine
       const imageUrl = `/uploads/profiles/${file.filename}`; // Salvăm calea relativă
 

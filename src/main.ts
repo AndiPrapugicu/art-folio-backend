@@ -16,7 +16,7 @@ async function bootstrap() {
 
   // Configurare CORS
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: 'https://art-folio-coral.vercel.app/',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
@@ -40,7 +40,7 @@ async function bootstrap() {
     index: false,
     setHeaders: (res) => {
       res.set({
-        'Access-Control-Allow-Origin': 'http://localhost:5173',
+        'Access-Control-Allow-Origin': 'https://art-folio-coral.vercel.app/',
         'Cross-Origin-Resource-Policy': 'cross-origin',
         'Cache-Control': 'public, max-age=3600',
       });

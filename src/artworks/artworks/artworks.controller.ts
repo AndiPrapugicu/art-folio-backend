@@ -241,7 +241,7 @@ export class ArtworksController {
         success: true,
         artwork: {
           ...newArtwork,
-          imageUrl: `http://localhost:3000${imageUrl}`,
+          imageUrl: `https://art-folio-backend.onrender.com/api${imageUrl}`,
         },
         message: 'Artwork încărcat cu succes',
       };

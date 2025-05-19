@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const dbPath = path.join(__dirname, '..', 'database.sqlite');
-const HOST_PREFIX = 'http://localhost:3000';
+const HOST_PREFIX = 'https://art-folio-backend.onrender.com/api';
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
