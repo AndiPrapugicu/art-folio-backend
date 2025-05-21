@@ -40,7 +40,7 @@ async function bootstrap() {
     index: false,
     setHeaders: (res) => {
       res.set({
-        'Access-Control-Allow-Origin': 'https://art-folio-coral.vercel.app/',
+        'Access-Control-Allow-Origin': 'https://art-folio-coral.vercel.app',
         'Cross-Origin-Resource-Policy': 'cross-origin',
         'Cache-Control': 'public, max-age=3600',
       });
