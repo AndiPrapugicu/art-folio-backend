@@ -14,7 +14,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
-  // Configurare CORS
+  // Configurare CORS global (pentru API și uploads)
   app.enableCors({
     origin: 'https://art-folio-coral.vercel.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -23,7 +23,7 @@ async function bootstrap() {
 
   // Definirea directoarelor pentru upload-uri
   const uploadsConfig = {
-    root: join(process.cwd(), 'uploads'), // Modificat din __dirname, '..' în process.cwd()
+    root: join(process.cwd(), 'uploads'),
     directories: ['profiles', 'products', 'artworks'],
   };
 
@@ -35,22 +35,15 @@ async function bootstrap() {
     }
   });
 
-  // Configurare middleware pentru servirea fișierelor statice
-  const staticFileMiddleware = express.static(uploadsConfig.root, {
-    index: false,
-    setHeaders: (res) => {
-      res.set({
-        'Access-Control-Allow-Origin': 'https://art-folio-coral.vercel.app',
-        'Cross-Origin-Resource-Policy': 'cross-origin',
-        'Cache-Control': 'public, max-age=3600',
-      });
-    },
-  });
+  // Servirea fișierelor statice pentru /uploads
+  app.use(
+    '/uploads',
+    express.static(uploadsConfig.root, {
+      index: false,
+    }),
+  );
 
-  // Aplicare middleware pentru ruta /uploads
-  app.use('/uploads', staticFileMiddleware);
-
-  // Configurare pentru servirea fișierelor statice
+  // (Opțional) Pentru compatibilitate cu ServeStaticModule
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
     index: false,
